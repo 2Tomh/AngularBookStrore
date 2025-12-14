@@ -1,0 +1,95 @@
+:host {
+display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 6.1rem);
+  padding: 150px;
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+}
+
+form {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.headLine {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e1e1e;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffb703;
+    padding-bottom: 10px;
+}
+
+.input-text {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff; 
+    color: #1e1e1e;
+}
+
+.input-text:focus {
+    border-color: #ffb703;
+    box-shadow: 0 0 0 2px rgba(255, 183, 3, 0.2);
+    outline: none;
+}
+
+.invalid-message {
+    color: #d9534f;
+    font-size: 13px;
+    margin-top: -10px;
+}
+
+.input-text.invalid-message {
+    border-color: #d9534f;
+}
+
+.nav-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.button-submit {
+    background-color: #ffb703;
+    color: #1e1e1e;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    width: 100%;
+}
+
+.button-submit:hover:not([disabled]) {
+    background-color: #ffaa00;
+}
+
+.button-submit[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    form{
+        width: max-content;
+        margin-bottom: auto;
+    }
+}

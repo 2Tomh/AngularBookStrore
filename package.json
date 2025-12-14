@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@angular/core": "^20.3.12",
+    "@angular/platform-browser": "^20.3.12"
+  },
+  "devDependencies": {
+    "@angular/cli": "^20.3.10"
+  }
+}

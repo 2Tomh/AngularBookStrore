@@ -1,0 +1,176 @@
+.books-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-top: 2rem;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+    width: 80%;
+    justify-content: unset;
+    align-items: center;
+    margin: auto;
+}
+
+.book-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-height: 450px;
+    flex-direction: column;
+    display: flex
+}
+
+.book-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.book-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.book-card h2 {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.book-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 3px 0;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 8px;
+}
+
+.book-card button {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: auto
+}
+
+.book-card button:hover {
+    background-color: #0d47a1;
+    transform: translateY(-1px);
+}
+
+.cart-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #53ff03;
+    color: #1e1e1e;
+    padding: 18px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    z-index: 2000;
+    font-size: 17px;
+    font-weight: 600;
+    animation: fadeOut 0.5s 2.5s;
+}
+@media (max-width: 768px) {
+    .books-container {
+    margin-top: 5rem;
+}
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .books-grid {
+        /* Use 90% width to better fill the viewport */
+        width: 90%; 
+        padding: 0 10px;
+        /* Set to two equal columns */
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px;
+        align-items: unset;
+    }
+    
+    .book-card {
+        padding: 12px;
+    }
+    
+    .cart-notification {
+        padding: 12px 20px;
+        font-size: 15px;
+        /* Use the correct value */
+        transform: translateX(-50%); 
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        display: none;
+    }
+}

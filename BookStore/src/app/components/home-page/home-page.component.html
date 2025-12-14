@@ -1,0 +1,25 @@
+<div class="books-container">
+    <h1>Our Books</h1>
+    <app-search-page (searchChanged)="onSearchChanged($event)"></app-search-page>
+
+    <div *ngIf="cartMessage" class="cart-notification">
+        {{ cartMessage }}
+    </div>
+    
+    <div class="books-grid">
+        <div *ngIf="displayedBooks.length === 0">
+            <p>No results found.</p>
+        </div>
+
+        <div *ngFor="let book of displayedBooks" class="book-card">
+            <a [routerLink]="['/book', book._id]">
+                <img [src]="book.imageUrl" alt="{{book.title}}">
+                <h2>{{book.title}}</h2>
+                <p>{{book.author}}</p>
+                <p class="price">{{book.price}} ₪</p>
+            </a>
+            
+            <button (click)="addBookToCart(book)">Add To Cart</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+:host {
+    width: 100%;
+    max-height: calc(100vh - 4rem);
+    display: block;
+    margin-top: 4rem auto;
+}
+
+.container {
+    width: 100%;
+    min-height: calc(100vh - 6.1rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form {
+    width: 40%;
+    border-radius: 5px;
+    margin: 2rem;
+    padding: 1rem;
+}

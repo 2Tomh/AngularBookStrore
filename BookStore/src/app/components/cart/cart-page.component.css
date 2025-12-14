@@ -1,0 +1,262 @@
+/* --- הגדרות בסיס ו-RTL: מתאים לקלאס .cart-container --- */
+.cart-container {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    /* שמירה על המיקום המקורי */
+    max-width: 900px;
+    /* שמירה על הרוחב המקורי */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    /* הוספת RTL כללי לכל הבלוק */
+    direction: rtl;
+    text-align: right;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    /* השתמשתי ב-eee כפי שהיה במקור, לא ב-#1890ff */
+    padding-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+/* גלילה לטבלה */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* טבלה */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* יישור לימין עבור RTL */
+    text-align: right;
+    margin-top: 20px;
+}
+
+thead th {
+    background-color: #f0f0f0;
+    padding: 0.8rem;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    /* יישור לימין עבור RTL */
+    text-align: right;
+}
+
+/* כוונון ספציפי: Action אמור להיות מיושר לשמאל (קצה השורה) */
+thead th:last-child {
+    text-align: left;
+}
+
+tbody td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    /* יישור לימין עבור RTL */
+    text-align: right;
+    /* הוספה: מאפשר לטקסט ארוך לרדת שורה בתוך התא (במיוחד חשוב לכותרות) */
+    word-break: break-word;
+}
+
+/* כוונון ספציפי: Action אמור להיות מיושר לשמאל (קצה השורה) */
+tbody td:last-child {
+    text-align: left;
+}
+
+
+tbody tr:hover {
+    background-color: #fafafa;
+}
+
+input[type="number"] {
+    width: 100%;
+    max-width: 70px;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    /* מעבר לשמאל (ב-RTL זה מרחק מהתוכן שלפניו) */
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* כפתור כללי (למשל Remove) */
+.remove-btn,
+button {
+    padding: 0.35rem 0.8rem;
+    background-color: #dc3545;
+    /* אדום כמו בדוגמה Remove */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.remove-btn:hover,
+button:hover {
+    background-color: #c82333;
+    /* אדום כהה יותר */
+}
+
+/* --- עיצוב אזור סך הכל ו-Checkout --- */
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px solid #ddd;
+    flex-wrap: wrap;
+    /* Total מימין, Check Out משמאל */
+    flex-direction: row-reverse;
+}
+
+.cart-total p {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
+}
+
+.cart-total button {
+    background-color: #28a745;
+    /* ירוק כמו בדוגמה Check Out */
+    padding: 10px 20px;
+    font-size: 1.1em;
+    margin-top: 0;
+}
+
+.cart-total button:hover {
+    background-color: #218838;
+}
+
+
+/* --- רספונסיביות - מסכים קטנים (פחות מ-768px) --- */
+@media (max-width: 768px) {
+    /* אין שינויים ספציפיים כאן, עובר ישירות ל-400px */
+}
+
+/* --- רספונסיביות - מסכי מובייל (תצוגת עמודות) --- */
+@media (max-width: 400px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        /* width: 100%; */
+    }
+
+    thead {
+        display: none;
+    }
+
+    /* עיצוב כל שורת פריט כ'כרטיס' */
+    tbody tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0;
+        /* *שינוי:* הקטנת הרוחב ל-85% וריכוז */
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #eee;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    tbody td:last-child {
+        border-bottom: none;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        text-align: right;
+        max-width: 50%;
+        min-width: 30%;
+        flex-shrink: 0;
+    }
+
+    tbody td:not(:first-child):not(:last-child) {
+        text-align: left;
+        flex-grow: 1;
+        min-width: 0;
+    }
+
+    tbody td:first-child {
+        font-size: 1.1em;
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        display: block;
+        text-align: right;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    tbody td:first-child::before {
+        content: none;
+    }
+
+    tbody td:nth-child(3) {
+        flex-wrap: nowrap;
+    }
+
+
+    tbody td:last-child {
+        justify-content: center;
+        padding: 0.8rem 1rem;
+        border-top: 1px solid #eee;
+    }
+
+    input[type="number"] {
+        max-width: 50px;
+        margin: 0;
+    }
+
+    .remove-btn {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .cart-total {
+        flex-direction: column;
+        align-items: center;
+        border-top: none;
+        margin-top: 10px;
+        padding-top: 0;
+    }
+
+    .cart-total button {
+        order: 1;
+        margin-top: 10px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .cart-total p {
+        order: 2;
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+}

@@ -1,0 +1,14 @@
+<header class="admin-header">
+    <div class="headet_Nav">
+        <a routerLink="/admin/dashboard" class="admin-title">Admin Console</a>
+        <div class="admin-nav-links">
+            <a routerLink="/admin/dashboard" routerLinkActive="active-link">Dashboard</a>
+            <a (click)="onLogOut()" style="cursor: pointer;">LogOut</a>
+            <a routerLink="/home">Back to App</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>

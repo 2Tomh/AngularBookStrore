@@ -1,0 +1,45 @@
+<div class="account-container" *ngIf="user">
+
+    <h2>Account Settings</h2>
+
+    <div class="account-card">
+        <div class="form-group">
+            <label for="userName">User Name:</label>
+            <input id="userName" type="text" [(ngModel)]="user.userName" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" type="email" [(ngModel)]="user.email" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" type="text" [(ngModel)]="user.password" />
+        </div>
+
+        <div class="button-group-container">
+            <button class="btn save" (click)="saveChanges()">Save Changes</button>
+            <button class="btn delete" (click)="deleteAccount()">Delete Account</button>
+        </div>
+    </div>
+
+    <div class="discounts">
+        <h3>Your Discounts</h3>
+
+        <div *ngIf="discount.length === 0" class="no-discount">
+            No discounts available.
+        </div>
+
+        <ul *ngIf="discount?.length">
+            <li *ngFor="let d of discount">
+                {{ d.name }} - {{ d.amount }}%
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div *ngIf="!user" class="not-logged-in">
+    <p>Please sign in to access your account.</p>
+</div>

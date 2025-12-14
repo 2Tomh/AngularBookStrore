@@ -1,0 +1,47 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="headLine">Login</div>
+
+  <input type="text"
+         class="input-text"
+         name="username"
+         required
+         [ngClass]="usernameField.touched && usernameField.invalid ? 'invalid-message' : ''"
+         [(ngModel)]="userName"
+         #usernameField="ngModel"
+         placeholder="UserName">
+
+  <div class="invalid-message" *ngIf="usernameField.touched && usernameField.invalid">
+    You must enter user name
+  </div>
+
+  <input type="email"
+         class="input-text"
+         name="email"
+         required
+         [ngClass]="emailField.touched && emailField.invalid ? 'invalid-message' : ''"
+         [(ngModel)]="email"
+         #emailField="ngModel"
+         placeholder="Email">
+
+  <div class="invalid-message" *ngIf="emailField.touched && emailField.invalid">
+    You must enter email
+  </div>
+
+  <input type="password"
+         class="input-text"
+         name="password"
+         required
+         [ngClass]="passwordField.touched && passwordField.invalid ? 'invalid-message' : ''"
+         [(ngModel)]="password"
+         #passwordField="ngModel"
+         placeholder="Password">
+
+  <div class="invalid-message" *ngIf="passwordField.touched && passwordField.invalid">
+    You must enter password
+  </div>
+
+  <div class="nav-container">
+    <button type="submit" class="button-submit" [disabled]="loginForm.invalid">Submit</button>
+    <a routerLink="/user/subscribe">New user Subscribe</a>
+  </div>
+</form>

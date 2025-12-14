@@ -1,0 +1,33 @@
+<form [formGroup]="subscribeForm" (ngSubmit)="onSubmitSubscribeForm()">
+    <input type="text" placeholder="First Name" class="input-text" formControlName="firstName">
+    <div *ngIf="firstName.touched && firstName.invalid" class="invalid-message">{{invalidFirstNameMessage()}}
+    </div>
+
+    <input type="text" placeholder="Last Name" class="input-text" formControlName="lastName">
+    <div *ngIf="lastName.touched && lastName.invalid" class="invalid-message">You Must Enter Last Name</div>
+
+    <input type="number" placeholder="Age" class="input-text" formControlName="age">
+    <div *ngIf="age.touched && age.invalid" class="invalid-message">{{invalidAgeMessage()}}</div>
+
+    <input type="text" placeholder="Email" class="input-text" formControlName="email">
+    <div *ngIf="email.touched && email.invalid" class="invalid-message">You Must Enter Email</div>
+
+    <input type="password" placeholder="Password" class="input-text" formControlName="password">
+    <div *ngIf="password.touched && password.invalid" class="invalid-message">{{invalidPasswordMessage()}}</div>
+
+    <input type="password" placeholder="Repeat Password" class="input-text" formControlName="passwordRepeated">
+    <div *ngIf="passwordRepeated.touched && (passwordRepeated.invalid || subscribeForm.errors?.passwordNotRepeated)"
+        class="invalid-message">
+        {{invalidPasswordRepeated()}}
+    </div>
+
+
+    <input type="checkbox" class="inlineBlock" formControlName="terms">
+    <div class="inlineBlock">I read the terms</div>
+    <div class="invalid-message" *ngIf="terms.touched && terms.errors?.required === true"> you muse sign the
+        terms</div>
+        <div class="nav-container">
+            <button [disabled]="subscribeForm.invalid">Submit</button>
+            <a routerLink="/user">Login</a>
+        </div>
+</form>

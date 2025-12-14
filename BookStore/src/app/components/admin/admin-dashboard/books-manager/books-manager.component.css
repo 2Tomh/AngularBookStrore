@@ -1,0 +1,211 @@
+.admin-section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.admin-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #3498db;
+    display: inline-block;
+    padding-bottom: 5px;
+    color: #333;
+}
+
+.admin-section h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+.book-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.book-form input,
+.book-form textarea,
+.book-form button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    min-width: 150px;
+}
+
+.book-form textarea {
+    resize: vertical;
+    flex-grow: 1;
+}
+
+/* Table */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table tr {
+    height: 70px;
+}
+
+table td {
+    vertical-align: middle;
+}
+
+table td input,
+table td textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+table td textarea {
+    height: 40px;
+    resize: none;
+    overflow-y: auto;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.books-cards {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    table {
+        display: none;
+    }
+
+    .books-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .book-card {
+        background: #fff;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+    }
+
+    .book-card-section {
+        margin-bottom: 12px;
+    }
+
+    .book-card-section h4 {
+        margin: 0 0 5px;
+        font-size: 0.9em;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .book-card-section input,
+    .book-card-section textarea {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 0.9em;
+    }
+
+    .book-card-section img {
+        width: 70px;
+        height: auto;
+        margin-bottom: 5px;
+        border-radius: 6px;
+    }
+
+    .book-card-section button {
+        margin-top: 5px;
+        background-color: #e74c3c;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .book-card-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .book-card-actions button {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+
+    .book-card-actions button:first-child {
+        background-color: #2ecc71;
+    }
+
+    .book-card-actions button:last-child {
+        background-color: #e74c3c;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .admin-section {
+        padding: 6px;
+    }
+
+    .admin-section h2 {
+        font-size: 1.3em;
+    }
+
+    .admin-section h3 {
+        font-size: 1.1em;
+    }
+
+    .book-form {
+        gap: 10px;
+    }
+
+    .book-form input,
+    .book-form textarea,
+    .book-form button {
+        font-size: 0.9em;
+        padding: 6px 8px;
+    }
+
+    table {
+        min-width: 550px;
+    }
+
+    table th, table td {
+        font-size: 0.8em;
+        padding: 6px 4px;
+    }
+}

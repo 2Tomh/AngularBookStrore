@@ -1,0 +1,30 @@
+.search-book {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0 40px 0;
+}
+
+.search-book input[type="text"] {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  border-radius: 50px;
+}
+
+.search-book input[type="text"]:focus {
+  border-color: #ffb703;
+  box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.2);
+  outline: none;
+}
+
+.search-book input[type="text"]::placeholder {
+  color: #999999;
+  font-style: italic;
+}

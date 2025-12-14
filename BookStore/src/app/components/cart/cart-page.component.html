@@ -1,0 +1,46 @@
+<div class="cart-container">
+    <h1>Your Cart</h1>
+
+    <div *ngIf="(_cartItems | async)?.length === 0; else cartTable">
+        <p>Your Cart is empty. You haven't made a purchase yet.</p>
+    </div>
+
+    <ng-template #cartTable>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of (_cartItems | async)">
+                        <td data-label="Title">{{item.book.title}}</td>
+                        <td data-label="Price">{{item.book.price | number:'1.2-2'}}</td>
+                        <td data-label="Quantity">
+                            <input type="number" [value]="item.quantity" min="1"
+                                (change)="updateQuantity(item.book._id, $any($event.target).value)">
+                        </td>
+                        <td data-label="Subtotal">{{item.book.price * item.quantity | number:'1.2-2'}}</td>
+                        <td>
+                            <button class="remove-btn" (click)="removeItem(item.book._id)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>
+
+    <div *ngIf="(_cartItems | async)?.length > 0" class="cart-total">
+        <button (click)="checkOut()">Check Out</button>
+        <p>Total: {{(total$ | async) | number:'1.2-2'}}</p>
+    </div>
+
+    <div *ngIf="checkoutSuccess" class="checkout-notification">
+        Your order has been placed successfully!
+    </div>
+</div>

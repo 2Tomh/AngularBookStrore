@@ -1,0 +1,119 @@
+.header {
+    width: 100%;
+    height: auto;
+    background: #1e1e1e;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header_Nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+
+.header_Nav_Home {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header_Nav_Home > a:first-child {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffb703;
+    text-decoration: none;
+}
+
+.header_Nav_Home a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0 8px;
+    transition: color 0.2s ease;
+}
+
+.header_Nav_Home a:hover {
+    color: #ffb703;
+}
+
+.header_Nav_Auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    background-color: transparent;
+    border: 1px solid #ffb703;
+    color: #ffb703;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+.btn:hover {
+    background-color: #ffb703;
+    color: #1e1e1e;
+}
+
+.btn.accent {
+    background-color: #ffb703;
+    color: #1e1e1e;
+    border: none;
+    font-weight: 500;
+}
+
+.btn.accent:hover {
+    background-color: #ffaa00;
+}
+
+.btn.logout {
+    border-color: #ff5555;
+    color: #ff5555;
+}
+
+.btn.logout:hover {
+    background-color: #ff5555;
+    color: white;
+}
+
+.welcome-text {
+    margin: 0;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+@media (max-width: 768px) {
+    .header_Nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+
+    .header_Nav_Home {
+        gap: 15px;
+    }
+
+    .header_Nav_Home > a:first-child {
+        font-size: 20px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+}

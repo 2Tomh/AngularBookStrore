@@ -1,0 +1,88 @@
+<section class="admin-section">
+    <h2>Manage Books</h2>
+
+    <h3>Add New Book</h3>
+    <div class="book-form">
+        <input type="text" placeholder="Title" [(ngModel)]="newBook.title" name="newTitle" required />
+        <input type="text" placeholder="Author" [(ngModel)]="newBook.author" name="newAuthor" required />
+        <input type="number" placeholder="Price" [(ngModel)]="newBook.price" name="newPrice" required />
+        <textarea placeholder="Description" [(ngModel)]="newBook.description" name="newDescription" rows="3"></textarea>
+        <input type="file" (change)="onFileSelected($event, newBook, true)">
+        <button (click)="addBook()">Add Book</button>
+    </div>
+
+    <!-- Books Table -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td><input [(ngModel)]="book.title" name="bookTitle_{{book._id}}" type="text" /></td>
+                    <td><input [(ngModel)]="book.author" name="bookAuthor_{{book._id}}" type="text" /></td>
+                    <td><input [(ngModel)]="book.price" name="bookPrice_{{book._id}}" type="number" /></td>
+                    <td><textarea [(ngModel)]="book.description" name="bookDescription_{{book._id}}" rows="2"></textarea></td>
+
+                    <td>
+                        <img *ngIf="book.imageUrl" [src]="book.imageUrl" alt="Book image" width="50" />
+                        <button *ngIf="book.imageUrl" (click)="deleteImage(book)">Delete Image</button>
+                        <input type="file" (change)="onFileSelected($event, book)">
+                    </td>
+
+                    <td>
+                        <button (click)="saveChanges(book)">Save Changes</button>
+                        <button (click)="deleteBook(book._id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mobile Cards -->
+    <div class="books-cards" *ngIf="books && books.length > 0">
+        <div class="book-card" *ngFor="let book of books">
+
+            <div class="book-card-section">
+                <h4>Title</h4>
+                <input [(ngModel)]="book.title" type="text">
+            </div>
+
+            <div class="book-card-section">
+                <h4>Author</h4>
+                <input [(ngModel)]="book.author" type="text">
+            </div>
+
+            <div class="book-card-section">
+                <h4>Price</h4>
+                <input [(ngModel)]="book.price" type="number">
+            </div>
+
+            <div class="book-card-section">
+                <h4>Description</h4>
+                <textarea [(ngModel)]="book.description" rows="2"></textarea>
+            </div>
+
+            <div class="book-card-section">
+                <h4>Image</h4>
+                <img *ngIf="book.imageUrl" [src]="book.imageUrl" alt="book image">
+                <button *ngIf="book.imageUrl" (click)="deleteImage(book)">Delete Image</button>
+                <input type="file" (change)="onFileSelected($event, book)">
+            </div>
+
+            <div class="book-card-actions">
+                <button (click)="saveChanges(book)">Save</button>
+                <button (click)="deleteBook(book._id)">Delete</button>
+            </div>
+
+        </div>
+    </div>
+</section>
