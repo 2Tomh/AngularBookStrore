@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../../services/login.service'
+import { LoginService } from '../../app/services/login.service'
 
 
 @Component({
@@ -20,12 +20,12 @@ export class AdminLoginComponent implements OnInit {
   loginAdmin() {
     this.loginService.signIn('', this.email, this.password)
 
-    this.loginService.userChanged.subscribe(user => {
+    this.loginService.UserChanged.subscribe(user => {
       if (user) {
         if (user.isAdmin) {
           this.router.navigate(['/admin'])
         } else {
-          this.loginService.logOut()
+          this.loginService.logout()
         }
       }
     })

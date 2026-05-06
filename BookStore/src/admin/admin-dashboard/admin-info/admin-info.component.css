@@ -1,0 +1,170 @@
+.admin-section {
+    background-color: #ffffff;
+    border-radius: 20px;
+    min-width: 300px;
+    margin: 40px auto;
+    border: 1px solid #f0f0f0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.admin-section h2,
+.admin-section h3 {
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.admin-section h2 {
+    font-size: 1.6em;
+    border-bottom: 3px solid #007bff;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.admin-section h3 {
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 10px;
+}
+
+.profile-view p {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: #444;
+    border: 1px solid #eee;
+}
+
+.profile-view strong {
+    color: #007bff;
+}
+
+.admin-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.admin-section label {
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9em;
+    margin-bottom: -12px;
+    margin-left: 5px;
+}
+
+.admin-section input {
+    padding: 14px;
+    border: 1.5px solid #e1e1e1;
+    border-radius: 12px;
+    font-size: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.admin-section input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+    outline: none;
+}
+
+.admin-section input:disabled {
+    background-color: #f5f5f5;
+    color: #888;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    flex: 2;
+    transition: all 0.2s ease;
+    font-weight: 700;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-cancel {
+    background-color: #ff0000;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    flex: 2;
+    transition: all 0.2s ease;
+    font-weight: 700;
+}
+
+.btn-cancel:hover {
+    background-color: #e9ecef;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+@media (max-width: 480px) {
+    .admin-section {
+        padding: 15px 10px;
+        margin: 0 auto;
+        width: 100%;
+        min-width: unset;
+        border: none;
+    }
+
+    .admin-section h2 {
+        font-size: 1.4rem;
+    }
+
+    .modal-actions {
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .admin-section input {
+        padding: 14px;
+        border: 1.5px solid #e1e1e1;
+        border-radius: 12px;
+        font-size: 1em;
+        width: initial;
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+}

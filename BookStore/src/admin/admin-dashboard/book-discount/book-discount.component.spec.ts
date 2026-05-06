@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserDiscountComponent } from './user-discount.component';
+import { BookDiscountComponent } from './book-discount.component';
 
-describe('UserDiscountComponent', () => {
-  let component: UserDiscountComponent;
-  let fixture: ComponentFixture<UserDiscountComponent>;
+describe('BookDiscountComponent', () => {
+  let component: BookDiscountComponent;
+  let fixture: ComponentFixture<BookDiscountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserDiscountComponent ]
+      declarations: [ BookDiscountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserDiscountComponent);
+    fixture = TestBed.createComponent(BookDiscountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

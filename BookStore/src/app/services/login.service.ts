@@ -1,120 +1,83 @@
-import { Injectable } from "@angular/core";
-import { User } from "./../models/user.models";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { ApiResult } from "../models/apiResult.model";
-import { environment } from "../../environments/environment";
-import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Injectable } from "@angular/core"
+import { User } from "./../models/user.models"
+import { HttpClient, HttpErrorResponse } from "@angular/common/http"
+import { Router } from "@angular/router"
+import { environment } from "../../environments/environment"
+import { BehaviorSubject, Observable } from 'rxjs'
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
-    public userSubject = new BehaviorSubject<User | null>(null);
-    userChanged: Observable<User | null> = this.userSubject.asObservable();
-    private _token!: string
+    public userSubject = new BehaviorSubject<User | null>(null)
+    UserChanged: Observable<User | null> = this.userSubject.asObservable()
+
+    private _token: string = ""
+    private readonly AUTH_URL = `${environment.DB}/Users`
 
     constructor(private http: HttpClient, private router: Router) { }
 
-    get myUser(): User | null { return this.userSubject.value; }
+    get myUser(): User | null { return this.userSubject.value }
 
-    private setMyUser(userName: string, id: string, isAdmin: boolean, password:string, email:string) {
-        const user: User = { userName,password, email, id, isAdmin };
-        this.userSubject.next(user);
+    private setMyUser(user: User) {
+        this._token = user.id.toString()
+        this.userSubject.next(user)
     }
 
     get token() {
-        return this._token
+        return this._token || localStorage.getItem('token') || ""
     }
+
     signUp(userName: string, email: string, password: string) {
-        const isAdmin = false;
+        const userData = { userName, email, password };
 
-        this.http.post<ApiResult>(
-            environment.FIREBASE_SIGNUP,
-            { email, password, returnSecureToken: true }
-        ).pipe(
-            tap((res: ApiResult) => {
-                this._token = res.idToken;
-            }),
-            switchMap((res: ApiResult) => {
-                const userId = res.localId;
-
-                const userData = {
-                    userName: userName,
-                    email: email,
-                    password: password,
-                    isAdmin: isAdmin
-                };
-
-                const DB_URL = environment.DB.trim();
-
-                return this.http.put(`${DB_URL}/users/${userId}.json?auth=${res.idToken}`, userData)
-                    .pipe(
-                        switchMap(() => of({ userId }))
-                    );
-            })
-        ).subscribe({
-            next: ({ userId }) => {
-                this.setMyUser(userName, userId, isAdmin, password,email);
-                this.router.navigate(['/home']);
+        this.http.post<User>(`${this.AUTH_URL}/signup`, userData).subscribe({
+            next: (user) => {
+                alert("Registration successful! Logging you in...");
+                this.signIn(userName, email, password);
             },
-            error: (err: HttpErrorResponse) => {
-                let errorMessage = 'Signup failed. Please check your credentials and internet connection.';
-
-                if (err.error?.error?.message) {
-                    errorMessage = err.error.error.message;
-                }
-
-                console.error(`Signup failed: ${errorMessage}`, err);
-                this.userSubject.next(null);
+            error: (err) => {
+                console.error("Signup failed", err);
+                alert(err.error || "Signup failed");
             }
         });
     }
-
     signIn(userName: string, email: string, password: string) {
-        let userId: string;
-        let token: string;
-        let isAdmin: boolean = false;
-
-        this.http.post<ApiResult>(
-            environment.FIREBASE_SIGNIN,
-            { email, password, returnSecureToken: true }
-        ).pipe(
-            tap((res: ApiResult) => {
-                token = res.idToken;
-                userId = res.localId;
-            }),
-            switchMap(() => {
-                const DB_URL = environment.DB.trim();
-                return this.http.get<any>(`${DB_URL}/users/${userId}.json?auth=${token}`);
-            })
-        ).subscribe({
-            next: (dbRes) => {
-                isAdmin = dbRes?.isAdmin || false;
-                this._token = token;
-                const actualUserName = dbRes?.userName || userName;
-
-                this.setMyUser(actualUserName, userId, isAdmin, password, email);
-                this.router.navigate(['/home']);
-            },
-            error: (err: HttpErrorResponse) => {
-                let errorMessage = 'Sign-in failed. Please check your credentials.';
-
-                if (err.error && err.error.error && err.error.error.message) {
-                    errorMessage = err.error.error.message;
+        const loginData = { userName, email, password };
+        this.http.post<any>(`${this.AUTH_URL}/signin`, loginData).subscribe({
+            next: (res) => {
+                const loggedInUser: User = {
+                    id: res.userId,
+                    userName: res.userName,
+                    email: email,
+                    isAdmin: res.role === 'Admin',
+                    password: password
+                };
+                if (loggedInUser.id) {
+                    this.userSubject.next(loggedInUser);
+                    localStorage.setItem('token', res.token);
+                    this.router.navigate(['/home']);
+                } else {
+                    alert("Error: Server did not return a valid User ID");
                 }
-
-                console.error(`Sign-in failed: ${errorMessage}`, err);
-                this.userSubject.next(null);
-            }
+            },
+            error: (err) => console.error("Login Error:", err)
         });
     }
-
-    logOut() {
+    updateCurrentUser(updatedUser: User) {
+        this.userSubject.next(updatedUser);
+    }
+    logout() {
         this._token = ""
-        this.userSubject.next(null);
+        localStorage.removeItem('token')
+        localStorage.removeItem('role')
+        this.userSubject.next(null)
         this.router.navigate(['/home'])
+    }
+    deleteAccount(id: number) {
+        return this.http.delete(`${this.AUTH_URL}/${id}`).subscribe({
+            next: () => this.logout(),
+            error: (err) => console.error("delete user failed", err)
+        })
     }
 }

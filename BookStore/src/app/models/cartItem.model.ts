@@ -1,4 +1,4 @@
-import {Book} from '../services/books.service'
+import {Book} from '../models/book.models'
 
 export interface CartItem{
     book: Book

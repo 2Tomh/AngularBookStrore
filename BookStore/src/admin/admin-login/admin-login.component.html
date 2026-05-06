@@ -1,5 +1,5 @@
 <form #adminLoginForm="ngForm" (ngSubmit)="loginAdmin()">
-    <div class="headLine">Admin Login</div>
+    <div class="headLine">Admin</div>
  <input type="email"
          class="input-text"
          name="email"
@@ -7,10 +7,10 @@
          [(ngModel)]="email"
          #emailField="ngModel"
          [ngClass]="emailField.touched && emailField.invalid ? 'invalid-message' : ''"
-         placeholder="Admin Email">
+         placeholder="email">
 
     <div class="invalid-message" *ngIf="emailField.touched && emailField.invalid">
-        You  must enter admin email
+        You must enter a valid adminstrator email
     </div>
 
   <input type="password"
@@ -20,10 +20,10 @@
          [(ngModel)]="password"
          #passwordField="ngModel"
          [ngClass]="passwordField.touched && passwordField.invalid ? 'invalid-message' : ''"
-         placeholder="Admin password">
+         placeholder="password">
 
     <div class="invalid-message" *ngIf="passwordField.touched && passwordField.invalid">
-        tou must enter password
+        You must enter a password
     </div>
     <div class="nav-container">
         <button type="submit" class="button-submit" [disabled]="adminLoginForm.invalid">

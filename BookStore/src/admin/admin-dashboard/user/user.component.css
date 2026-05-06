@@ -1,0 +1,159 @@
+.admin-section {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 1rem auto;
+  max-width: 1200px;
+}
+
+.admin-section h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.4rem;
+  border-bottom: 3px solid #1890ff;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* --- Desktop Styles --- */
+thead th {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 2px solid #eee;
+  text-align: left;
+}
+
+tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* --- Badges & Status --- */
+.badge-admin, .badge-user {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.badge-admin { background-color: #e74c3c; color: white; }
+.badge-user { background-color: #3498db; color: white; }
+
+/* --- Forms & Buttons --- */
+select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 150px;
+}
+
+.btn-delete-user {
+  background-color: #c0392b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-delete-user:hover { background-color: #e74c3c; }
+
+/* --- Mobile View (Responsive 350px - 480px) --- */
+@media (max-width: 480px) {
+  .admin-section {
+    padding: 1rem;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+    /* width: 100%; */
+  }
+
+  thead { display: none; }
+
+  tbody tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid #f5f5f5;
+    text-align: right;
+    min-height: 45px;
+    /* פותר את חיתוך הטקסט בצדדים */
+    overflow: hidden; 
+  }
+
+  tbody td:last-child {
+    border-bottom: none;
+    padding-top: 15px;
+    display: block; /* נותן לכפתור שורה שלמה */
+  }
+
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-right: 10px;
+    text-align: left;
+  }
+
+  /* תיקון לנראות התוכן בתוך הכרטיס */
+  tbody td span, 
+  tbody td select {
+    max-width: 160px;
+    word-break: break-all; /* מונע ממיילים ארוכים לברוח מהמסך */
+  }
+
+.action-cell {
+    display: block !important; /* מבטל את ה-Flex */
+    text-align: center;
+    padding: 15px 5px !important;
+  }
+
+  /* מבטל את הכותרת "Action" רק לכפתור כדי שלא יצטופף */
+  .action-cell::before {
+    display: none !important;
+  }
+
+  .btn-delete-user {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .badge-admin, .badge-user {
+    margin-left: auto; /* מצמיד את התג לימין */
+  }
+}

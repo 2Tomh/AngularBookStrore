@@ -1,0 +1,40 @@
+<section class="admin-section discounts-section">
+    <h2>Manage Book Discount</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Original Price</th>
+                    <th>Current Discount</th>
+                    <th>After discount</th>
+                    <th>Update Discount (%)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td data-label="Book">{{ book.title }}</td>
+                    <td data-label="Author">{{ book.author }}</td>
+                    <td data-label="Price">{{ book.price | currency:'ILS' }}</td>
+                    <td data-label="Discount">{{ book.discountPercentage || 0 }}%</td>
+                    <td data-label="newPrice">
+                        <div *ngIf="book.discountPercentage > 0">
+                             {{ calculateDiscountedPrice(book.price, book.discountPercentage) }}₪
+                        </div>
+                    </td>
+                    <td data-label="Action">
+                        <div class="input-group">
+                            <input type="number" [(ngModel)]="book.newDiscount" min="0" max="100" placeholder="%" />
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn-update" (click)="setDiscount(book)">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

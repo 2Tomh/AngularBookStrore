@@ -1,0 +1,38 @@
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+
+    <div class="main-layout-container">
+        <div class="navigation-panel">
+            
+            <div class="dashboard-card" (click)="isModalOpen = true">
+                <h2>Admin Info</h2>
+            </div>
+
+            <div class="dashboard-card" routerLink="./users" routerLinkActive="active-card">
+                <h2>Users</h2>
+            </div>
+
+            <div class="dashboard-card" routerLink="./books-manager" routerLinkActive="active-card">
+                <h2>Manage Books</h2>
+            </div>
+
+            <div class="dashboard-card" routerLink="./book-discount" routerLinkActive="active-card">
+                <h2>Book Discounts</h2>
+                <p>Set discounts for users</p>
+            </div>
+        </div>
+
+        <div class="content-view">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div class="modalBackDrop" *ngIf="isModalOpen">
+        <div class="modalContent">
+            <div class="modelHeader">
+                <span class="closeBtn" (click)="isModalOpen = false">&times;</span>
+            </div>
+            <app-admin-info (closeModal)="isModalOpen = false"></app-admin-info>
+        </div>
+    </div>
+</div>

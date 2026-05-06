@@ -1,0 +1,139 @@
+<section class="admin-section">
+    <div class="header-container">
+        <h2>Manage Books</h2>
+        <button class="btn-add-main" (click)="isAddModalOpen = true">
+            + Add New Book
+        </button>
+    </div>
+
+    <div class="modal-backdrop" *ngIf="isAddModalOpen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Book</h3>
+                <span class="close-btn" (click)="isAddModalOpen = false">&times;</span>
+            </div>
+
+            <form #bookForm="ngForm" class="book-form-grid">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input type="text" placeholder="Title" [(ngModel)]="newBook.title" name="newTitle" required
+                        #title="ngModel" [class.input-error]="title.invalid && title.touched" />
+                    <small class="error-text" *ngIf="title.invalid && title.touched">Title is required</small>
+                </div>
+
+                <div class="input-group">
+                    <label>Author</label>
+                    <input type="text" placeholder="Author" [(ngModel)]="newBook.author" name="newAuthor" required
+                        #author="ngModel" [class.input-error]="author.invalid && author.touched" />
+                    <small class="error-text" *ngIf="author.invalid && author.touched">Author is required</small>
+                </div>
+
+                <div class="input-group">
+                    <label>Price</label>
+                    <input type="number" placeholder="Price" [(ngModel)]="newBook.price" name="newPrice" required
+                        min="0.01" #price="ngModel" [class.input-error]="price.invalid && price.touched" />
+                    <small class="error-text" *ngIf="price.invalid && price.touched">Valid price is required</small>
+                </div>
+
+                <div class="input-group">
+                    <label>Discount %</label>
+                    <input type="number" placeholder="Discount %" [(ngModel)]="newBook.discountPercentage"
+                        name="newDiscount" />
+                </div>
+
+                <div class="input-group full-width">
+                    <label>Description</label>
+                    <textarea placeholder="Description" [(ngModel)]="newBook.description" name="newDescription" rows="3"
+                        required #desc="ngModel" [class.input-error]="desc.invalid && desc.touched"></textarea>
+                    <small class="error-text" *ngIf="desc.invalid && desc.touched">Description is required</small>
+                </div>
+
+                <div class="input-group full-width">
+                    <label>Book Image</label>
+                    <input type="file" id="fileInput" (change)="onFileSelected($event, newBook, true)">
+                    <div *ngIf="newBook.imageUrl" class="image-preview">
+                        <img [src]="newBook.imageUrl">
+                        <button type="button" (click)="newBook.imageUrl = ''" class="btn-delete-small">Remove</button>
+                    </div>
+                </div>
+
+                <div class="modal-actions full-width">
+                    <button type="button" class="btn-cancel" (click)="isAddModalOpen = false">Cancel</button>
+                    <button type="button" (click)="addBook()" class="btn-confirm" [disabled]="bookForm.invalid">
+                        Confirm & Add Book
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Author</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books">
+                    <td data-label="Title">{{book.title}}</td>
+                    <td data-label="Price">{{book.price}}₪</td>
+                    <td data-label="Author">{{book.author}}</td>
+                    <td>
+                        <img *ngIf="book.imageUrl" [src]="book.imageUrl" class="table-thumb" />
+                    </td>
+                    <td>
+                        <div class="action-buttons-flex">
+                            <button (click)="editingBook = book" class="btn-edit-table">Edit</button>
+                            <button (click)="deleteBook(book.id)" class="btn-delete-table">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-backdrop" *ngIf="editingBook">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Book: {{editingBook.title}}</h3>
+                <span class="close-btn" (click)="editingBook = null">&times;</span>
+            </div>
+            <div class="book-form-grid">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input [(ngModel)]="editingBook.title" type="text" />
+                </div>
+                <div class="input-group">
+                    <label>Author</label>
+                    <input [(ngModel)]="editingBook.author" type="text" />
+                </div>
+                <div class="input-group">
+                    <label>Price</label>
+                    <input [(ngModel)]="editingBook.price" type="number" />
+                </div>
+                <div class="input-group">
+                    <label>Description</label>
+                    <textarea [(ngModel)]="editingBook.description" rows="2" class="full-width"></textarea>
+                </div>
+                <div class="input-group full-width">
+                    <label>Image</label>
+                    <input type="file" (change)="onFileSelected($event, editingBook)">
+                    <div *ngIf="editingBook.imageUrl" class="image-preview">
+                        <img [src]="editingBook.imageUrl">
+                        <button (click)="deleteImage(editingBook)" class="btn-delete-small">Delete Current
+                            Image</button>
+                    </div>
+                </div>
+                <div class="modal-actions full-width">
+                    <button (click)="editingBook = null" class="btn-cancel">Cancel</button>
+                    <button (click)="saveChanges(editingBook)" class="btn-confirm">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

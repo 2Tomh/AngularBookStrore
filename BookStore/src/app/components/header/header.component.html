@@ -1,27 +1,25 @@
 <header class="header">
     <div class="header_Nav">
-
         <div class="header_Nav_Home">
-            <a routerLink="home" class="header_Nav_Home">Book Store</a>
+            <a routerLink="home" class="header_Nav_Home">The Library</a>
         </div>
 
         <div class="header_Nav_Auth">
+            <ng-container *ngIf="!isAuthenticated">
+                <a routerLink="/admin/login" class="btn accent" routerLinkActive="active-link">Admin</a>
+                <a routerLink="/user" class="btn" routerLinkActive="active-link">Login</a>
+            </ng-container>
             <a routerLink="/cart" class="btn" routerLinkActive="active-link">Cart</a>
 
             <ng-container *ngIf="isAuthenticated">
-                <a *ngIf="isAdmin" class="btn" routerLink="/admin/dashboard" routerLinkActive="active-link">Admin
-                    Dashboard</a>
-                <a routerLink="/account" class="btn" routerLinkActive="active-link">Account</a>
-                <a (click)="onLogout()" class="btn logout" style="cursor: pointer;">LogOut</a>
-            </ng-container>
+                <a *ngIf="isAdmin" class="btn" routerLink="/admin/dashboard" routerLinkActive="active-link">Dashboard</a>
 
-            <ng-container *ngIf="!isAuthenticated">
-                <a routerLink="/user" class="btn" routerLinkActive="active-link">Login</a>
-                <a routerLink="/admin/login" class="btn accent" routerLinkActive="active-link">
-                    Admin Login
-                </a>
+                <a *ngIf="!isAdmin" (click)="isAccountModalOpen = true" class="btn" style="cursor: pointer;">Customer</a>
+
+                <a (click)="onLogout()" class="btn logout" style="cursor: pointer;">Cancel</a>
             </ng-container>
         </div>
-
     </div>
 </header>
+
+<app-account *ngIf="isAccountModalOpen" (closeModal)="isAccountModalOpen = false"></app-account>

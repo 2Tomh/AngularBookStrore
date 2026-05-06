@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { LoginService } from '../../services/login.service'
 
 @Component({
   selector: 'app-login',
@@ -8,9 +8,9 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userName!: string;
-  email!: string;
-  password!: string;
+  userName!: string
+  email!: string
+  password!: string
   constructor(private router: Router, private loginService:LoginService) { }
 
   ngOnInit(): void {

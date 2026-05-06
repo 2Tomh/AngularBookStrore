@@ -1,3 +1,4 @@
 <div class="search-book">
-  <input type="text" placeholder="Search by title or author"  [(ngModel)]="search" (input)="onSearch()">
+  <input type="text" [(ngModel)]="search" (input)="onSearch()" placeholder="Search for a book or author..."
+    class="search-bar" />
 </div>

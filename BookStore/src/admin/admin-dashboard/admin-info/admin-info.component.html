@@ -1,0 +1,22 @@
+<section class="admin-section">
+    <div *ngIf="!isEditMode" class="profile-view">
+        <h2>Admin Profile</h2>
+        <p><strong>Name:</strong> {{admin.userName}}</p>
+        <p><strong>Email:</strong> {{admin?.email}}</p>
+    </div>
+
+    <h3>Edit admin info</h3>
+    
+    <form (ngSubmit)="saveAdminChanges()">
+        <label for="adminName">Name:</label>
+        <input id="adminName" [(ngModel)]="admin.userName" name="adminName" required />
+
+        <label for="adminEmail">Email:</label>
+        <input id="adminEmail" [(ngModel)]="admin.email" name="adminEmail" required disabled />
+
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel" (click)="closeModal.emit()">Cancel</button>
+            <button type="submit" class="btn-save" (click)="saveAdminChanges()">Save Changes</button>
+        </div>
+    </form>
+</section>

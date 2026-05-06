@@ -1,6 +1,8 @@
 <div class="cart-container">
     <h1>Your Cart</h1>
-
+    <div *ngIf="checkoutSuccess" class="checkout-notification">
+        Your order has been placed successfully!
+    </div>
     <div *ngIf="(_cartItems | async)?.length === 0; else cartTable">
         <p>Your Cart is empty. You haven't made a purchase yet.</p>
     </div>
@@ -23,11 +25,14 @@
                         <td data-label="Price">{{item.book.price | number:'1.2-2'}}</td>
                         <td data-label="Quantity">
                             <input type="number" [value]="item.quantity" min="1"
-                                (change)="updateQuantity(item.book._id, $any($event.target).value)">
+                                (change)="updateQuantity(item.book.id, $any($event.target).value)">
                         </td>
-                        <td data-label="Subtotal">{{item.book.price * item.quantity | number:'1.2-2'}}</td>
+                        <td data-label="Subtotal">
+                            {{ (item.book.price * (1 - (item.book.discountPercentage || 0) / 100)) * item.quantity |
+                            number:'1.2-2' }} ₪
+                        </td>
                         <td>
-                            <button class="remove-btn" (click)="removeItem(item.book._id)">Remove</button>
+                            <button class="remove-btn" (click)="removeItem(item.book.id)">Remove</button>
                         </td>
                     </tr>
                 </tbody>
@@ -40,7 +45,4 @@
         <p>Total: {{(total$ | async) | number:'1.2-2'}}</p>
     </div>
 
-    <div *ngIf="checkoutSuccess" class="checkout-notification">
-        Your order has been placed successfully!
-    </div>
 </div>

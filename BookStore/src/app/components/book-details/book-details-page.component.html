@@ -1,42 +1,41 @@
-<!-- <div *ngIf="book" class="book-details">
-    <img [src]="book.imageUrl" alt="{{book.title}}">
-    <h1>{{book.title}}</h1>
-    <h3>{{book.author}}</h3>
-    <p class="price"> {{book.price}} ₪</p>
-    <button>Add To Cart</button>
-</div>
-
-<div *ngIf="!book">
-    <p>Book Not Found</p>
-</div> -->
 <div class="container">
-
     <div *ngIf="book" class="book-card">
-
         <div class="header-section">
-            <h1>{{book.title}}</h1>
-            <h3>{{book.author}}</h3>
+            <h1 class="book-title">{{book.title}}</h1>
+            <h3 class="book-author">{{book.author}}</h3>
         </div>
 
         <div class="content-wrapper">
             <div class="image-col">
-                <img [src]="book.imageUrl" class="book-cover">
+                <img [src]="book.imageUrl" class="book-cover" alt="{{book.title}}">
             </div>
 
             <div class="info-col">
-                <div *ngIf="book.description" class="description-box">
-                    <h4>summary</h4>
-                    <p class="description-text">{{book.description}}</p>
+                <div class="description-section">
+                    <h4>Discription</h4>
+                    <p class="book-description">{{ book.description }}</p>
                 </div>
 
                 <div class="price-section">
-                    <span class="price-tag">
-                        Price: {{book.price | number:'1.2-2'}} ₪
-                    </span>
+                    <div *ngIf="book.discountPercentage && book.discountPercentage > 0" class="price-discount-wrapper">
+                        <span class="old-price">
+                            {{book.price}} ₪
+                        </span>
+                        <span class="new-price">
+                            {{ discountPrice }} ₪
+                        </span>
+                        <span class="discount-badge">({{ book.discountPercentage }}% הנחה!)</span>
+                    </div>
+
+                    <div *ngIf="!book.discountPercentage || book.discountPercentage <= 0">
+                        <span class="price-tag">
+                            Price: {{ book.price}} ₪
+                        </span>
+                    </div>
                 </div>
 
-                <button class="add-to-cart-btn" (click)="addBookToCart(book)">
-                    Add To Cart
+                <button class="addToCartBtn" (click)="addBookToCart(book)">
+                    Add to cart
                 </button>
 
                 <div *ngIf="cartMessage" class="cart-notification">

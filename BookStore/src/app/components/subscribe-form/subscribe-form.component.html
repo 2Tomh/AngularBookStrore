@@ -26,8 +26,8 @@
     <div class="inlineBlock">I read the terms</div>
     <div class="invalid-message" *ngIf="terms.touched && terms.errors?.required === true"> you muse sign the
         terms</div>
-        <div class="nav-container">
-            <button [disabled]="subscribeForm.invalid">Submit</button>
-            <a routerLink="/user">Login</a>
-        </div>
+    <div class="nav-container">
+        <button [disabled]="subscribeForm.invalid">Submit</button>
+        <a routerLink="/user">Login</a>
+    </div>
 </form>

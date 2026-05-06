@@ -1,149 +1,158 @@
-/* --- הגדרות בסיס ו-RTL: מתאים לקלאס .cart-container --- */
 .cart-container {
-    background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 40px auto;
-    /* שמירה על המיקום המקורי */
-    max-width: 900px;
-    /* שמירה על הרוחב המקורי */
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    /* הוספת RTL כללי לכל הבלוק */
-    direction: rtl;
-    text-align: right;
+    max-width: 1000px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
 }
 
 h1 {
-    text-align: center;
-    color: #333;
+    color: #2c3e50;
+    font-size: 2.2rem;
     margin-bottom: 30px;
-    border-bottom: 2px solid #eee;
-    /* השתמשתי ב-eee כפי שהיה במקור, לא ב-#1890ff */
+    border-bottom: 3px solid #f1f1f1;
     padding-bottom: 10px;
-    font-size: 1.8rem;
+    text-align: center;
 }
 
-/* גלילה לטבלה */
+.checkout-notification {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #c3e6cb;
+    animation: fadeIn 0.5s ease-in;
+}
+
 .table-wrapper {
     overflow-x: auto;
-}
-
-/* טבלה */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* יישור לימין עבור RTL */
-    text-align: right;
     margin-top: 20px;
 }
 
-thead th {
-    background-color: #f0f0f0;
-    padding: 0.8rem;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-    /* יישור לימין עבור RTL */
-    text-align: right;
+.cart-container>div:not(.table-wrapper) p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-top: 20px;
 }
 
-/* כוונון ספציפי: Action אמור להיות מיושר לשמאל (קצה השורה) */
-thead th:last-child {
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+thead {
+    background-color: #f8f9fa;
+}
+
+th {
+    padding: 15px;
     text-align: left;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #edf2f7;
 }
 
-tbody td {
-    padding: 0.8rem;
-    border-bottom: 1px solid #eee;
-    /* יישור לימין עבור RTL */
-    text-align: right;
-    /* הוספה: מאפשר לטקסט ארוך לרדת שורה בתוך התא (במיוחד חשוב לכותרות) */
-    word-break: break-word;
-}
-
-/* כוונון ספציפי: Action אמור להיות מיושר לשמאל (קצה השורה) */
-tbody td:last-child {
-    text-align: left;
-}
-
-
-tbody tr:hover {
-    background-color: #fafafa;
+td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #edf2f7;
+    color: #2d3436;
+    vertical-align: middle;
 }
 
 input[type="number"] {
-    width: 100%;
-    max-width: 70px;
-    padding: 0.35rem 0.5rem;
-    border: 1px solid #ccc;
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
     border-radius: 6px;
     text-align: center;
-    /* מעבר לשמאל (ב-RTL זה מרחק מהתוכן שלפניו) */
-    margin-left: 0.5rem;
-    margin-right: 0;
+    outline: none;
+    transition: border 0.3s;
 }
 
-/* כפתור כללי (למשל Remove) */
-.remove-btn,
-button {
-    padding: 0.35rem 0.8rem;
-    background-color: #dc3545;
-    /* אדום כמו בדוגמה Remove */
+input[type="number"]:focus {
+    border-color: #3498db;
+}
+
+.remove-btn {
+    background-color: #ff7675;
     color: white;
     border: none;
+    padding: 8px 15px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.3s;
 }
 
-.remove-btn:hover,
-button:hover {
-    background-color: #c82333;
-    /* אדום כהה יותר */
+.remove-btn:hover {
+    background-color: #d63031;
 }
 
-/* --- עיצוב אזור סך הכל ו-Checkout --- */
 .cart-total {
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 2px solid #ddd;
-    flex-wrap: wrap;
-    /* Total מימין, Check Out משמאל */
-    flex-direction: row-reverse;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
 }
 
 .cart-total p {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 0;
+    color: #2c3e50;
+    margin: 0;
 }
 
 .cart-total button {
-    background-color: #28a745;
-    /* ירוק כמו בדוגמה Check Out */
-    padding: 10px 20px;
-    font-size: 1.1em;
-    margin-top: 0;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .cart-total button:hover {
-    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 
-/* --- רספונסיביות - מסכים קטנים (פחות מ-768px) --- */
-@media (max-width: 768px) {
-    /* אין שינויים ספציפיים כאן, עובר ישירות ל-400px */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* --- רספונסיביות - מסכי מובייל (תצוגת עמודות) --- */
-@media (max-width: 400px) {
+@media (max-width: 600px) {
+    .cart-container {
+        margin: 110px 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
 
     table,
     thead,
@@ -152,111 +161,51 @@ button:hover {
     td,
     tr {
         display: block;
-        /* width: 100%; */
+        width: 100%;
+        min-width: unset;
     }
 
     thead {
         display: none;
     }
 
-    /* עיצוב כל שורת פריט כ'כרטיס' */
-    tbody tr {
-        margin-bottom: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 0;
-        /* *שינוי:* הקטנת הרוחב ל-85% וריכוז */
-        width: 85%;
-        margin-left: auto;
-        margin-right: auto;
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #edf2f7;
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 275px;
+        width: unset;
     }
 
-    tbody td {
+    td {
         display: flex;
-        justify-content: space-around;
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid #eee;
-        flex-wrap: wrap;
-        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 10px 5px;
+        text-align: right;
     }
 
-    tbody td:last-child {
+    td:last-child {
         border-bottom: none;
     }
 
-    tbody td::before {
+    td::before {
         content: attr(data-label);
-        font-weight: 600;
-        text-align: right;
-        max-width: 50%;
-        min-width: 30%;
-        flex-shrink: 0;
-    }
-
-    tbody td:not(:first-child):not(:last-child) {
-        text-align: left;
-        flex-grow: 1;
-        min-width: 0;
-    }
-
-    tbody td:first-child {
-        font-size: 1.1em;
         font-weight: bold;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-        display: block;
-        text-align: right;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    tbody td:first-child::before {
-        content: none;
-    }
-
-    tbody td:nth-child(3) {
-        flex-wrap: nowrap;
-    }
-
-
-    tbody td:last-child {
-        justify-content: center;
-        padding: 0.8rem 1rem;
-        border-top: 1px solid #eee;
-    }
-
-    input[type="number"] {
-        max-width: 50px;
-        margin: 0;
-    }
-
-    .remove-btn {
-        padding: 0.4rem 0.5rem;
-        font-size: 0.9rem;
-        width: 100%;
-        max-width: 150px;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        font-size: 0.8rem;
     }
 
     .cart-total {
-        flex-direction: column;
-        align-items: center;
-        border-top: none;
-        margin-top: 10px;
-        padding-top: 0;
+        flex-direction: column-reverse;
+        text-align: center;
     }
 
     .cart-total button {
-        order: 1;
-        margin-top: 10px;
         width: 100%;
-        max-width: 300px;
-    }
-
-    .cart-total p {
-        order: 2;
-        width: 100%;
-        text-align: center;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
+        margin-top: 15px;
     }
 }

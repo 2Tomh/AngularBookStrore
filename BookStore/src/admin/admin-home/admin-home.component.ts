@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
+import { LoginService } from '../../app/services/login.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -13,7 +13,6 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
   }
   onLogOut() {
-    this.loginService.logOut();
-    // הפונקציה logOut בשירות כבר מנווטת ל- /home
+    this.loginService.logout();
   }
 }

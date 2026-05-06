@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { LoginService } from '../../services/login.service'
-import { User } from '../../models/user.models';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-
+import { User } from '../../models/user.models'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '../../../environments/environment'
+import { Router } from '@angular/router'
+import { Output } from '@angular/core'
+import { EventEmitter } from '@angular/core'
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  // מחזיק את פרטי המשתמש המחובר (userName, email, password)
   user!: User
   discount: any[] = []
   DB_URL = environment.DB.trim()
-
+  @Output() closeModal = new EventEmitter<void>();
+  isEditModalOpen = false;
   constructor(
     private loginService: LoginService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,52 +31,34 @@ export class AccountComponent implements OnInit {
   }
 
   loadDiscount(userId: string): void {
-
-    const token = this.loginService.token;
-
-    this.http.get<any>(`${this.DB_URL}/discount/${userId}.json?auth=${token}`)
+    this.http.get<any>(`${this.DB_URL}/Discount/${userId}`)
       .subscribe(
-        (res) => {
-          this.discount = res ? Object.values(res) : [];
-        },
-        () => {
-          this.discount = [];
-        }
-      );
+        (res) => { this.discount = res },
+        () => { this.discount = [] }
+      )
   }
 
   saveChanges(): void {
-    const token = this.loginService.token;
-    const userId = this.user.id;
-
-    const updatedUserData = {
-      userName: this.user.userName,
-      email: this.user.email,
-      password: this.user.password,
-      isAdmin: this.user.isAdmin
-    };
-
-    this.http.patch(
-      `${this.DB_URL}/users/${userId}.json?auth=${token}`, updatedUserData).subscribe(() => {
-        alert("user updated");
-      });
+    this.http.put(`${this.DB_URL}/Users/${this.user.id}`, this.user).subscribe(() => {
+      this.loginService.updateCurrentUser(this.user);
+      this.isEditModalOpen = false
+      alert("User updated")
+    })
   }
 
 
   deleteAccount(): void {
-    if (!confirm('Are you sure you want to delte your account')) return
-
-    const token = this.loginService.token
+    if (!confirm("Are you sure?")) return
     const userId = this.user.id
-
-    this.http.delete(
-      `${this.DB_URL}/users/${userId}.json?auth=${token}`
-    ).subscribe(() => {
-      this.loginService.logOut()
+    this.http.delete(`${this.DB_URL}/Users/${userId}`).subscribe(() => {
+      this.loginService.logout()
     })
   }
 
   logOut(): void {
-    this.loginService.logOut()
+    this.loginService.logout()
+  }
+  onClose() {
+    this.closeModal.emit()
   }
 }

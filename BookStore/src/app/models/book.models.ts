@@ -1,7 +1,9 @@
 export interface Book {
-  _id?: string
+  id?: number
   title: string
   author: string
-  price: number     
+  price?: number
+  imageUrl?: string
   description?: string
+  discountPercentage?: number
 }
